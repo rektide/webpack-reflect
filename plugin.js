@@ -3,9 +3,10 @@ function WebpackReflectPlugin() {}
 WebpackReflectPlugin.prototype.apply = function( compiler){
 	compiler.plugin('compilation', function( compilation){
 		var
-		  _payload= {},
+		  _payload,
 		  _target
 		compilation.plugin("record-modules", function( modules, records){
+			_payload= {}
 			for( var module of modules){
 				var payloadModule= _payload[ module.portableId]= {
 					id: module.id

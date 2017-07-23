@@ -1,6 +1,6 @@
 {
 	"name": "webpack-reflect",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Provides rudimentary runtime reflective capabilities over a Webpack bundle.",
 	"main": "webpack-reflect.js",
 	"scripts": {
@@ -10,7 +10,16 @@
 		"type": "git",
 		"url": "https://archive.voodoowarez.com/webpack-reflect"
 	},
-	"keywords": ["webpack", "reflect", "require", "runtime", "browser"],
+	"keywords": [
+		"webpack",
+		"reflect",
+		"require",
+		"runtime",
+		"browser"
+	],
 	"author": "rektide de la faye",
-	"license": "X11"
+	"license": "X11",
+	"dependencies": {
+		"global-object": "^1.0.0"
+	}
 }
