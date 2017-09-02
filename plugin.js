@@ -5,7 +5,8 @@ WebpackReflectPlugin.prototype.apply = function( compiler){
 		var
 		  _payload,
 		  _target
-		compilation.plugin("record-modules", function( modules, records){
+		compilation.plugin("record", function( self, records){
+			var modules = self.modules;
 			_payload= {}
 			for( var module of modules){
 				var payloadModule= _payload[ module.portableId]= {
@@ -17,14 +18,12 @@ WebpackReflectPlugin.prototype.apply = function( compiler){
 				}
 			}
 
-			var target= modules.filter( m=> m.portableId.indexOf( "webpack-reflect/reflections.js")!== -1)
+			var target= modules.filter( m=> m.portableId&& m.portableId.indexOf( "webpack-reflect/reflections.js")!== -1)
 			if( target.length!== 1){
-				throw new Error( "Expected one reflection.js module")
+				throw new Error( "Expected one reflection.js module, got "+ target.length)
 			}
 			_target= target[ 0]
-		})
 
-		compilation.plugin("record-hash", function( records){
 			var modules= records.modules.byIdentifier
 			for( var identifier in modules){
 				var payloadModule= _payload[ identifier]
