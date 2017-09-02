@@ -1,9 +1,11 @@
 var Reflections= require( "./reflections")
 var numberToIdentifier= require( "./number-to-identifier")
 
+console.log("refl", Reflections)
+
 function Require( name){
 	var
-	  data= Reflections[ name],
+	  data= Require._reflections[ name],
 	  rawModule= __webpack_require__( data.id)
 	if( !data.usedExports){
 		return rawModule
@@ -17,5 +19,6 @@ function Require( name){
 	}
 	return module
 }
+Require._reflections = Reflections
 
 module.exports= Require
