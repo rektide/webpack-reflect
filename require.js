@@ -10,12 +10,23 @@ function Require( name){
 	if( !data.usedExports){
 		return rawModule
 	}
-	var module= {}
+	var
+	  module= {},
+	  matches= 0
 	for( var i in data.usedExports){
 		var
 		  name= data.usedExports[ i],
-		  identifier= numberToIdentifier[ i]
-		module[ name]= rawModule[ identifier]
+		  identifier= numberToIdentifier[ i],
+		  value= rawModule[ identifier]
+		module[ name]= value
+		if( value!== undefined){
+			++matches
+		}
+	}
+	if( !matches){
+		// cjs module.exports = ... had a 'default' usedExports with undefined value
+		// probably smarter heuristics could handle this better but doing this last via detection feels safe
+		return rawModule
 	}
 	return module
 }
